@@ -5,26 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tic-tac-toe</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="gameboard">
-      <div>
-        <button class="row1 column1 cell" id="r1c1"></button>
-        <button class="row1 column2 cell" id="r1c2"></button>
-        <button class="row1 column3 cell" id="r1c3"></button>
+    <main>
+      <div class="display-message"></div>
+      <div class="gameboard">
+        <div>
+          <button data-index="0" class="row1 column1 cell" id="r1c1"></button>
+          <button data-index="1" class="row1 column2 cell" id="r1c2"></button>
+          <button data-index="2" class="row1 column3 cell" id="r1c3"></button>
+        </div>
+        <div>
+          <button data-index="3" class="row2 column1 cell" id="r2c1"></button>
+          <button data-index="4" class="row2 column2 cell" id="r2c2"></button>
+          <button data-index="5" class="row2 column3 cell" id="r2c3"></button>
+        </div>
+        <div>
+          <button data-index="6" class="row3 column1 cell" id="r3c1"></button>
+          <button data-index="7" class="row3 column2 cell" id="r3c2"></button>
+          <button data-index="8" class="row3 column3 cell" id="r3c3"></button>
+        </div>
       </div>
-      <div>
-        <button class="row2 column1 cell" id="r2c1"></button>
-        <button class="row2 column2 cell" id="r2c2"></button>
-        <button class="row2 column3 cell" id="r2c3"></button>
+      <div class="restart">
+        <button data-index="" id="restart">Restart</button>
       </div>
-      <div>
-        <button class="row3 column1 cell" id="r3c1"></button>
-        <button class="row3 column2 cell" id="r3c2"></button>
-        <button class="row3 column3 cell" id="r3c3"></button>
-      </div>
-    </div>
+    </main>
   </body>
 </html>
