@@ -21,6 +21,9 @@ const playerFactory = (name, sign, isActive) => {
         state.isActive = true;
       }
     },
+    change(name) {
+      state.name = name;
+    },
   };
 };
 const gameBoard = (() => {
@@ -41,7 +44,33 @@ const gameBoard = (() => {
   };
 })();
 const displayController = (() => {
+  const restartButton = document.getElementById("restart");
+  const cells = document.querySelectorAll(".cell");
   const display = document.querySelector(".display-message");
+  const startButton = document.getElementById("start");
+  // event listener for start button to set player names and show the game board
+  startButton.addEventListener("click", () => {
+    const playerX = document.getElementById("playerX");
+    const playerO = document.getElementById("playerO");
+    const playerSelectMenu = document.querySelector(".player");
+    const gameBoard = document.getElementById("gameboard");
+    const restartDiv = document.querySelector(".restart");
+    const startDiv = document.querySelector(".start");
+
+    if (playerX.value !== "") {
+      gameFlow.player1.change(playerX.value);
+    }
+    if (playerO.value !== "") {
+      gameFlow.player2.change(playerO.value);
+    }
+    displayController.turnMessage(gameFlow.player1);
+    playerSelectMenu.classList.add("hide");
+    startDiv.classList.add("hide");
+    display.classList.remove("hide");
+    gameBoard.classList.remove("hide");
+    restartDiv.classList.remove("hide");
+  });
+
   // function to show players turn
   function turnMessage(player) {
     display.textContent = `${player.name}'s turn.`;
@@ -51,7 +80,6 @@ const displayController = (() => {
     display.textContent = `${player.name} has won this match!!!`;
   }
 
-  const cells = document.querySelectorAll(".cell");
   // event listener for click in cells to show the signs
   cells.forEach((cell) => {
     cell.addEventListener("click", () => {
@@ -84,7 +112,6 @@ const displayController = (() => {
       }
     });
   });
-  const restartButton = document.getElementById("restart");
   // event listener for restart button to clear everything and start from start
   restartButton.addEventListener("click", () => {
     gameFlow.reset();
@@ -96,11 +123,11 @@ const displayController = (() => {
   return { winMessage, turnMessage };
 })();
 const gameFlow = (() => {
-  const player1 = playerFactory("Player X", "X", true);
-  const player2 = playerFactory("Player O", "O", false);
   let round = 0;
   let gameOver = false;
-  displayController.turnMessage(player1);
+  const player1 = playerFactory("Player 1", "X", true);
+  const player2 = playerFactory("Player 2", "O", false);
+
   // function to reset to be called by restart button
   function reset() {
     gameFlow.round = 0;
